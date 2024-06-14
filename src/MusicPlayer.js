@@ -1,23 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect ,useRef} from 'react';
 
 const MusicPlayer = ({ play }) => {
+    const audioRef = useRef(null);
   useEffect(() => {
     const audio = new Audio('/mixkit-light-rain-looping-1249.wav');
     audio.loop = true;
-
-    const playAudio = () => {
-      audio.play().catch((error) => {
-        console.log('Error playing audio:', error);
-      });
-    };
-
-    // Attempt to play audio immediately
-    if (play) {
-      playAudio();
+    audioRef.current = audio;
+    const handleUserInteraction = ()=>{
+        if(play && audioRef.current){
+            audioRef.current.play();
+        }
     }
+    
+    // Attempt to play audio immediately
+    window.addEventListener('click', handleUserInteraction);
+    window.addEventListener('touchstart', handleUserInteraction);
 
     return () => {
-      audio.pause();
+      window.removeEventListener('click', handleUserInteraction);
+      window.removeEventListener('touchstart', handleUserInteraction);
+      audioRef.current.pause();
     };
   }, [play]);
 

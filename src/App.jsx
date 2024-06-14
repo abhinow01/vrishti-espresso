@@ -11,7 +11,7 @@ function App() {
     <>
     <Router>
       <div className='relative'>
-      <video autoPlay loop muted className="absolute w-full h-full object-cover">
+      <video autoPlay="true" loop muted="true" className="absolute w-full h-full object-cover">
           <source src="/2960875-hd_1920_1080_30fps.mp4" type="video/mp4" />
         </video>
         <div className="relative z-10 min-h-screen bg-black bg-opacity-50">
